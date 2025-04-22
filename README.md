@@ -1,5 +1,3 @@
-.  
-Leetcode Solutions in javascript
 # Leetcode Solutions in JavaScript
 ## About This Repository
 
