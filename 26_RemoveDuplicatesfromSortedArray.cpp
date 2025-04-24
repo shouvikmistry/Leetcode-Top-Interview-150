@@ -67,23 +67,23 @@ public:
 };
 int main()
 {
-    Solution s;
-    vector<int> nums = {};
+    Solution s; //create an object of the class Solution
+    vector<int> nums = {};//create an empty vector of integers
     nums = {1, 1, 2};
     // nums = {0,0,1,1,1,2,2,3,3,4};
-    for (int i = 0; i < nums.size(); i++)
+    for (int i = 0; i < nums.size(); i++)//print the elements of the vector
     {
         cout << nums[i] << " ";
     }
     cout << endl;
-    int k = s.removeDuplicates(nums);
-    cout << "k: " << k << endl;
-    cout << "nums: ";
+    int k = s.removeDuplicates(nums);//call the removeDuplicates function and store the result in k
+    cout << "The number of unique elements in the array is: " << k << endl;
+    cout << "k: " << k << endl; //print the value of k
+    cout << "Array with unique elements: ";
     for (int i = 0; i < k; i++)
     {
-        cout << nums[i] << " ";
+        cout << nums[i] << " "; //print each unique element in the array
     }
-    cout << endl;
     return 0;
 }
 // Time Complexity: O(n)
