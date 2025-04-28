@@ -44,3 +44,6 @@ for (let i = 1; i < nums.length; i++) {
 }
 return maxElement;
 };
+
+let nums = [6,5,5,]
+console.log(majorityElement(nums)); 
