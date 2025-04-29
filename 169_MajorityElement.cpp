@@ -34,6 +34,8 @@ class Solution
 public:
     int majorityElement(vector<int> &nums)
     {
+        // Boyer-Moore Voting Algorithm
+        // This algorithm works in O(n) time and O(1) space complexity.
         int maxElement = nums[0];
         int count = 1;
         for (int i = 1; i < nums.size(); i++)
@@ -53,6 +55,14 @@ public:
             }
         }
         return maxElement;
+
+        
+//--------------------------------------------------------------------------------------
+        //Sorting Method
+        // time complexity O(nlogn) and space complexity O(1)
+
+        sort(nums.begin(), nums.end());
+        return nums[nums.size() / 2]; // The majority element will always be at the middle after sorting
     }
 };
 

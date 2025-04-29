@@ -28,6 +28,10 @@ Follow-up: Could you solve the problem in linear time and in O(1) space?
  * @return {number}
  */
 var majorityElement = function(nums) {
+
+//Boyer-Moore Voting Algorithm
+//Time Complexity: O(n)
+//Space Complexity: O(1)
 let maxElement =  nums[0];
 let count = 1; // Renamed from maxN
 
@@ -43,6 +47,16 @@ for (let i = 1; i < nums.length; i++) {
     }
 }
 return maxElement;
+
+//--------------------------------------------------------------
+//Sorting Method
+//Time Complexity: O(nlogn)
+//Space Complexity: O(1)
+
+nums.sort((a,b) =>a-b);
+return nums[Math.floor(nums.length/2)];
+//Math.floor(3/2==1.5) = 1 nearest int value
+
 };
 
 let nums = [6,5,5,]
