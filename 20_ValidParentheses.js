@@ -42,22 +42,41 @@ s consists of parentheses only '()[]{}'.
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function(s) {
+    var isValid = function (s) {
+
+        //Another approach using stack
+        // Time complexity: O(n)
+        // Space complexity: O(n)
+        // const stack = [];
+        // for (const c of s) {
+        //     if (c === '(') {
+        //         stack.push(')');
+        //     } else if (c === '{') {
+        //         stack.push('}');
+        //     } else if (c === '[') {
+        //         stack.push(']');
+        //     } else if (stack.length === 0 || stack.pop() !== c) {
+        //         return false;
+        //     }
+        // }
+        // return stack.length === 0;
+
+
     let stack = new Array();
-    for(let i=0;i<s.length;i++){
-        if(s[i]=='(' || s[i]=='{' || s[i]=='['){
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
             stack.push(s[i]);
-        }else{
-            if(stack.length==0){
+        } else {
+            if (stack.length == 0) {
                 return false;
             }
             let top = stack.pop();
-            if((s[i]==')' && top!='(') || (s[i]=='}' && top!='{') || (s[i]==']' && top!='[')){
+            if ((s[i] == ')' && top != '(') || (s[i] == '}' && top != '{') || (s[i] == ']' && top != '[')) {
                 return false;
             }
         }
     }
-    return stack.length==0;
+    return stack.length == 0;
 };
 // Example usage:
 console.log(isValid("()")); // true
