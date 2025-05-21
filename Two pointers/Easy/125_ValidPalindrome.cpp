@@ -66,7 +66,7 @@ public:
         // Step 3: Check if the filtered string is a palindrome
         int left = 0;
         int right = newStr.size() - 1;
-        while (left <= right)
+        while (left < right)
         {
             if (newStr[left] != newStr[right]){
                 isPalindrome = false; //Early exit if mismatch found

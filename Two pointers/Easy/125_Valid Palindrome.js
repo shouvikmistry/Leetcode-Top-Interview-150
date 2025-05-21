@@ -54,8 +54,8 @@ var isPalindrome = function (s) {
     //               ^       ^  
     //               left    right
 
-    while(left<=right)
-    // while the left pointer is less than or equal to the right pointer
+    while(left<right)
+    // while the left pointer is less than the right pointer
     // left and right pointer will meet in the middle 
     // "a b c d e"
     //      ^
