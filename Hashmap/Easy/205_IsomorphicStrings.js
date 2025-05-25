@@ -49,32 +49,28 @@ s and t consist of any valid ascii character.
  * @return {boolean}
  */
 var isIsomorphic = function (s, t) {
-    if (s.length != t.length) {
-        return false;
-    }
+    if (s.length !== t.length) return false;
+
     let charMaping = new Map();
+
     for (let i = 0; i < s.length; i++) {
         let original = s[i];
         let replacement = t[i];
-        // console.log(charMaping.get(replacement));
-        // if (!charMaping.keys(original)) //dont check value
+
         if (!charMaping.has(original)) {
             if ([...charMaping.values()].includes(replacement)) {
                 return false;
             }
             charMaping.set(original, replacement);
-        }
-        else {
+        } else {
             if (charMaping.get(original) !== replacement) {
-
                 return false;
             }
         }
-
     }
+
     return true;
 };
-
 let s = "egg", t = "add";
 s = "foo", t = "bar";
 s = "paper", t = "title"
