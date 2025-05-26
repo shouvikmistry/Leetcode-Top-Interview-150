@@ -51,9 +51,9 @@ s and t consist of any valid ascii character.
 var isIsomorphic = function (s, t) {
     if (s.length !== t.length) return false;
 
-    let charMaping = new Map();
+    let charMapping = new Map();
 
-    for (let i = 0; i < s.length; i++) {
+    for (let i = 0; i < s.size(); i++) {
         let original = s[i];
         let replacement = t[i];
 
@@ -71,8 +71,7 @@ var isIsomorphic = function (s, t) {
 
     return true;
 };
-let s = "egg", t = "add";
-s = "foo", t = "bar";
-s = "paper", t = "title"
-// isIsomorphic(s,t);
-console.log(isIsomorphic(s, t));
+
+console.log(isIsomorphic("egg", "add")); // Output: true
+console.log(isIsomorphic("foo", "bar")); // Output: false
+console.log(isIsomorphic("paper", "title")); // Output: true
