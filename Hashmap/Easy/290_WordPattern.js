@@ -53,9 +53,7 @@ var wordPattern = function (pattern, s) {
     let charMapping = new Map();
     let words = s.split(' '); // create Object ['dog', 'cat', 'cat', 'dog']
 
-    if (pattern.length !== words.length) {
-        return false;
-    }
+    if (pattern.length !== words.length) return false;
 
     for (let i = 0; i < pattern.length; i++) {
         let oneLetter = pattern[i];
@@ -75,8 +73,7 @@ var wordPattern = function (pattern, s) {
 
     return true;
 }
-let pattern = "abba", s = "dog cat cat dog";
-pattern = "abba", s = "dog cat cat fish";
-pattern = "aaaa", s = "dog cat cat dog";
 
-console.log(wordPattern(pattern, s));
+console.log(wordPattern("abba", "dog cat cat dog"));
+console.log(wordPattern("abba", "dog cat cat fish"));
+console.log(wordPattern("aaaa", "dog cat cat dog"));
