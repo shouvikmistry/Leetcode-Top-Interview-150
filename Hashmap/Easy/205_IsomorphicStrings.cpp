@@ -58,7 +58,7 @@ public:
 
         unordered_map<char, char> charMapping;
 
-        for (int i = 0; i < s.length(); ++i) {
+        for (int i = 0; i < s.length(); i++) {
             char original = s[i];
             char replacement = t[i];
 
@@ -80,12 +80,13 @@ public:
             } 
             // if the original character is already mapped then we will go to else block
             else {
+                // If it is already mapped, check if it maps to the same character pass the else block
+
                 // If it does not map to the same character, return false
                 if (charMapping[original] != replacement) {
                     return false;
                 }
 
-                // If it is already mapped, check if it maps to the same character pass the else block
             }
         }
         // If we reach here, the strings are isomorphic
