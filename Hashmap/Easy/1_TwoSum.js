@@ -38,23 +38,16 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    /*
+    
     // Brute force approach: O(n^2) time complexity
-    let ptr = 0;
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i]+nums[ptr]==target && i!=ptr) {
-            return [ptr,i];
-        } else {
-            if (i==nums.length-1) {
-                ptr++;
-                i=0;
+    for (let i = 0; i <nums.length; i++) {
+        for(let j = i+1; j <nums.length; j++){
+            if (nums[i]+nums[j]==target) {
+                return [i,j];
             }
-            else
-                ptr++;
         }
-        
     }
-        */
+    
     // Optimized approach: O(n) time complexity
     //using hashmap to store the indices of the elements
     let map = new Map();//using map to store the indices of the elements
