@@ -34,6 +34,7 @@ using namespace std;
 class Solution{
     public:
     bool isAnagram(string s,string t){
+        if(s.size()!=t.size()) return false;
         unordered_map<char,int> charMapping;
         for(auto c : s){
             charMapping[c]++;
@@ -47,6 +48,7 @@ class Solution{
         return true;
     }
     bool isAnagramArrayMethod(string s,string t){
+        if(s.size()!=t.size()) return false;
         int charMapping[26] = {0};
         for(auto c : s){
             charMapping[c-'a']++;
