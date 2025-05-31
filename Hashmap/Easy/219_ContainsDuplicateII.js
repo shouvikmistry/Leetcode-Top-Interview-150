@@ -28,6 +28,9 @@ Constraints:
  * @param {number} k
  * @return {boolean}
  */
+
+// Approach: Sliding Window with HashSet
+// Time Complexity: O(n), Space Complexity: O(min(n, k)))
 var containsNearbyDuplicate = function(nums, k) {
     const window = new Set();
     let left = 0;
@@ -44,13 +47,31 @@ var containsNearbyDuplicate = function(nums, k) {
     }
     return false;
 };
-//input: nums = [1,2,3,1], k = 3
+
+//HashMap Approach
+// Time Complexity: O(n), Space Complexity: O(n)
+var containsNearbyDuplicateHashMap = function(nums, k) {
+    const map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        if (map.has(nums[i]) && i - map.get(nums[i]) <= k) {
+            return true;
+        }
+        map.set(nums[i], i);
+    }
+    return false;
+};
+
+
+// Example usage:
 let nums = [1,2,3,1], k = 3;
 console.log(containsNearbyDuplicate(nums, k)); //output: true
-//input: nums = [1,0,1,1], k = 1
+console.log(containsNearbyDuplicateHashMap(nums, k)); //output: true
+
+
 nums = [1,0,1,1], k = 1;
 console.log(containsNearbyDuplicate(nums, k)); //output: true
-//input: nums = [1,2,3,1,2,3], k = 2
+console.log(containsNearbyDuplicateHashMap(nums, k)); //output: true
+
 nums = [1,2,3,1,2,3], k = 2;
 console.log(containsNearbyDuplicate(nums, k)); //output: false
-
+console.log(containsNearbyDuplicateHashMap(nums, k)); //output: false
