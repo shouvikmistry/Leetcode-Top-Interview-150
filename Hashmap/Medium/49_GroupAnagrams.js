@@ -38,16 +38,29 @@ strs[i] consists of lowercase English letters.
  * @return {string[][]}
  */
 var groupAnagrams = function(strs) {
-    let result;
-    let anagramMap;
+    // let result; // should be initialized to an empty array before using it because we are going to push elements into it
+    let result = [];
+    // let anagramMap; // should be initialized to an empty Map before using it because we are going to store key-value pairs in it using the Map object .has() and .set() methods
+    let anagramMap = new Map();
+
     for(let str of strs){
-        let sortedString = str;
-        sortedString.sort();
+        //let sortedString = str.sort() // This line is incorrect because strings do not have a sort method. We need to convert the string to an array of characters, sort it, and then join it back to a string.
+        // how we do that is by splitting the string into an array of characters, sorting the array, and then joining it back to a string
+        // str.split('') converts the string to an array of characters
+        // .sort() sorts the array of characters in ascending order
+        // .join('') joins the array of characters back to a string
+        let sortedString = str.split('').sort().join('');
         if(!anagramMap.has(sortedString)){
             anagramMap.set(sortedString, []);
         }
         anagramMap.get(sortedString).push(str);
     }
+
+    for(let group of anagramMap.values()){
+        result.push(group);
+    }
+    return result;
+};
     /*
     eg: strs = ["eat","tea","tan","ate","nat","bat"]
     str = "eat"
@@ -72,10 +85,6 @@ var groupAnagrams = function(strs) {
     eg. ["aet", "ant", "abt"]
 
     */
-    for(let group of anagramMap.values()){
-
-
-        result.push(group);
-    }
-    return result;
-};
+// Example usage:
+let strs = ["eat","tea","tan","ate","nat","bat"];
+console.log(groupAnagrams(strs));
