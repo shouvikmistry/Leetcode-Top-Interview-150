@@ -30,31 +30,11 @@ Constraints:
  */
 #include <bits/stdc++.h>
 using namespace std;
-class Solution
-{
-public:
-    int longestConsecutive(vector<int> &nums)
-    {
-         sort(nums.begin(), nums.end());
-        int result = 0;
-        for (int i = 0; i < nums.size(); i++)
-        {
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-
-                if (nums[i] + 1 != nums[j])
-                {
-                    return result;
-                }
-                result++;
-            }
-        }
-    }
-};
-
-// Brute Force O(n^3) solution
+    
 class Solution {
-public:
+    public:
+    
+    // Brute Force O(n^3) solution
     int longestConsecutive(vector<int>& nums) {
         int maxLen = 0;
 
@@ -83,13 +63,105 @@ public:
 
         return maxLen;
     }
+    // Brute Force O(n^3) solution with linear search
+    // This function performs a linear search to check if a number exists in the array.
+    bool linearSearch(vector<int> arr, int num)
+    {
+        for (int i = 0; i < arr.size(); i++)
+        {
+            if (arr[i] == num)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    int longestConsecutiveBruteForce(vector<int> &nums)
+    {
+        int maxLen = 0;
+
+        for (int i = 0; i < nums.size(); i++)
+        {
+            int x = nums[i];
+            int currentLen = 1;
+            while (linearSearch(nums, x + 1) == true)
+            {
+                x = x + 1;
+                currentLen = currentLen + 1;
+            }
+            maxLen = max(maxLen, currentLen);
+        }
+        return maxLen;
+    }
+
+    // Brute Force O(n^2) solution with sorting and nested loops
+    int longestConsecutiveSortedNestedLoops(vector<int> &nums)
+    {
+        int maxLen = 0;
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < nums.size(); i++)
+        {
+            int current = nums[i];
+            int count = 1;
+
+            for (int j = i + 1; j < nums.size(); j++)
+            {
+                if (nums[j] == current + 1)
+                {
+                    count++;
+                    current++;
+                }
+            }
+            maxLen = max(maxLen, count);
+        }
+        return maxLen;
+    }
+
+    // Optimized O(n log n) solution sorting the array skipping duplicates
+    int longestConsecutiveSorted(vector<int> &nums)
+    {
+        if (nums.empty())
+            return 0;
+
+        sort(nums.begin(), nums.end());
+
+        int maxLen = 1;
+        int currentLen = 1;
+
+        for (int i = 0; i < nums.size() - 1; i++)
+        {
+            if (nums[i] == nums[i + 1])
+            {
+                continue; // skip duplicates
+            }
+            else if (nums[i] + 1 == nums[i + 1])
+            {
+                currentLen++;
+            }
+            else
+            {
+                currentLen = 1; // reset current length
+            }
+
+            maxLen = max(maxLen, currentLen);
+        }
+
+        return maxLen;
+    }
 };
 
 int main()
 {
     Solution sol;
     vector<int> nums = {100, 4, 200, 1, 3, 2};
-    int result = sol.longestConsecutive(nums);
+    // nums = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
+    // nums = {1, 0, 1, 2};
+    // nums = {1, 2, 3, 4, 5};
+    int result = sol.longestConsecutiveBruteForce(nums);
     cout << "Longest consecutive sequence length: " << result << endl;
+    result = sol.longestConsecutiveSortedNestedLoops(nums);
+    cout << "Longest consecutive sequence length with nested loops: " << result << endl;
+    result = sol.longestConsecutiveSorted(nums);
+    cout << "Longest consecutive sequence length with sorting: " << result << endl;
     return 0;
 }
