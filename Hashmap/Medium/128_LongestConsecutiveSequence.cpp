@@ -26,7 +26,7 @@ using namespace std;
 class Solution
 {
 public:
-    // 🐢 Brute Force O(n^3) – checks each possible sequence manually
+    //  Brute Force O(n^3) – checks each possible sequence manually
     int longestConsecutive(vector<int> &nums)
     {
         int maxLen = 0;
@@ -39,7 +39,7 @@ public:
             while (true)
             {
                 bool found = false;
-                // 🔍 Check if next consecutive number exists( if current + 1 exists in the array )
+                //  Check if next consecutive number exists( if current + 1 exists in the array )
                 for (int j = 0; j < nums.size(); j++)
                 {
                     if (nums[j] == current + 1)
@@ -61,7 +61,7 @@ public:
         return maxLen;
     }
 
-    // 🔎 Brute Force O(n^3) using a linear search function
+    //  Brute Force O(n^3) using a linear search function
     bool linearSearch(vector<int> arr, int num)
     {
         for (int i = 0; i < arr.size(); i++)
@@ -91,7 +91,7 @@ public:
         return maxLen;
     }
 
-    // 📈 O(n^2) – Sorts and checks each sequence and nested loops
+    //  O(n^2) – Sorts and checks each sequence and nested loops
     int longestConsecutiveSortedNestedLoops(vector<int> &nums)
     {
         int maxLen = 0;
@@ -114,7 +114,7 @@ public:
         return maxLen;
     }
 
-    // ⚙️ Optimized O(n log n) – Sorts the array and skips duplicates
+    //  Optimized O(n log n) – Sorts the array and skips duplicates
     int longestConsecutiveSorted(vector<int> &nums)
     {
         if (nums.empty())
@@ -129,7 +129,7 @@ public:
         {
             if (nums[i] == nums[i + 1])
             {
-                continue; // 🔁 Skip duplicates
+                continue; //  Skip duplicates
             }
             else if (nums[i] + 1 == nums[i + 1])
             {
@@ -137,7 +137,7 @@ public:
             }
             else
             {
-                currentLen = 1; // 🔄 Reset count
+                currentLen = 1; //  Reset count
             }
 
             maxLen = max(maxLen, currentLen);
@@ -145,8 +145,54 @@ public:
 
         return maxLen;
     }
+    // Optimal O(n) using a HashMap to track visited nodes
+    /*
+     Additional Notes:
+            unordered_map<int, bool> is only needed if you must track visited status explicitly (like in BFS, DFS, or backtracking problems).
 
-    // ⚡ Optimal O(n) using a HashSet to avoid duplicates and re-checking
+            In this problem, you don’t need to mark visited—you can just start from the beginning of each sequence.
+    */
+    int longestConsecutiveHashMap(vector<int> &nums)
+    {
+        if (nums.empty())
+            return 0;
+        int maxLen = 0;
+
+        unordered_map<int, bool> setMap;
+         // Mark all numbers as unvisited
+        for (auto n : nums)
+        {
+            setMap[n] = false;
+        }
+
+        for (auto num : nums)
+        {
+            int currentLen = 1;
+            int nextNum = num + 1;
+            if (setMap[num])
+                continue;
+            setMap[num] = true;
+            // Expand to next
+            while (setMap.find(nextNum) != setMap.end() && setMap[nextNum] == false)
+            {
+                currentLen++;
+                setMap[nextNum] = true; // Mark as visited
+                nextNum++;
+            }
+            // Expand to previous
+            int prevNum = num - 1;
+            while (setMap.find(prevNum) != setMap.end() && setMap[nextNum] == false)
+            {
+                currentLen++;
+                setMap[nextNum] = true; // Mark as visited
+                prevNum--;
+            }
+            maxLen = max(maxLen, currentLen);
+        }
+        return maxLen;
+    }
+    //  Optimal O(n) using a HashSet to avoid duplicates and re-checking
+    //  O(n) – Cleanest approach using unordered_set
     int longestConsecutiveHashSet(vector<int> &nums)
     {
         if (nums.empty())
@@ -162,7 +208,7 @@ public:
 
         unordered_set<int> setMap(nums.begin(), nums.end());
         /*
-         🧠 Why we use a set:
+          Why we use a set:
          - Removes duplicates automatically
          - Allows O(1) lookup time for checking existence of a number
         */
@@ -178,18 +224,18 @@ public:
 
         for (auto num : setMap)
         /*
-        ⚡ Why This is Better:
+         Why This is Better:
             for (int num : setMap) avoids duplicate work (e.g., avoids going over 2 if you already handled 1 → 100)
             Avoids using nums[i] indexing at all
         */
         {
 
-            // 🛑 Start only if the previous number isn't in the set
+            // Start only if the previous number isn't in the set
             if (setMap.find(num - 1) == setMap.end())
             {
                 int x = num;
                 int currentLen = 1;
-                // ➕ Check for all next consecutive numbers
+                //  Check for all next consecutive numbers
                 while (setMap.find(x + 1) != setMap.end())
                 {
                     x++;
@@ -207,18 +253,18 @@ int main()
 {
     Solution sol;
     vector<int> nums = {100, 4, 200, 1, 3, 2};
-    // nums = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
-    // nums = {1, 0, 1, 2};
-    // nums = {1, 2, 3, 4, 5};
-    // nums = {0};
-    // nums = {};
-    int result = sol.longestConsecutiveBruteForce(nums);
-    cout << "Longest consecutive sequence length: " << result << endl;
-    result = sol.longestConsecutiveSortedNestedLoops(nums);
-    cout << "Longest consecutive sequence length with nested loops: " << result << endl;
-    result = sol.longestConsecutiveSorted(nums);
-    cout << "Longest consecutive sequence length with sorting: " << result << endl;
-    result = sol.longestConsecutiveHashSet(nums);
-    cout << "Longest consecutive sequence length with HashSet: " << result << endl;
+    // Try other inputs:
+    // vector<int> nums = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
+    // vector<int> nums = {1, 0, 1, 2};
+    // vector<int> nums = {1, 2, 3, 4, 5};
+    // vector<int> nums = {0};
+    // vector<int> nums = {};
+
+    cout << " Brute Force: " << sol.longestConsecutiveBruteForce(nums) << endl;
+    cout << " Sorted + Nested Loops: " << sol.longestConsecutiveSortedNestedLoops(nums) << endl;
+    cout << "  Sorted + Linear: " << sol.longestConsecutiveSorted(nums) << endl;
+    cout << " HashSet Optimized: " << sol.longestConsecutiveHashSet(nums) << endl;
+    cout << " HashMap Version: " << sol.longestConsecutiveHashMap(nums) << endl;
+
     return 0;
 }
